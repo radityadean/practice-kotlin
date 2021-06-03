@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PracticePLCoding</string>
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAypCR6Iv3xsgvh4XG1uHbeJB8VgV-SMfA</string>
+    <string name="google_api_key" translatable="false">AIzaSyAypCR6Iv3xsgvh4XG1uHbeJB8VgV-SMfA</string>
+</resources>
