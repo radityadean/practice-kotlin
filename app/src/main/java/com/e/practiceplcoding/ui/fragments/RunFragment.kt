@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.e.practiceplcoding.R
-import com.e.practiceplcoding.other.Constans.REQUEST_CODE_LOCATION_PERMISSION
+import com.e.practiceplcoding.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.e.practiceplcoding.other.TrackingUtility
 import com.e.practiceplcoding.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint

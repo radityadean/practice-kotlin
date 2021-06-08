@@ -3,7 +3,7 @@ package com.e.practiceplcoding.di
 import android.content.Context
 import androidx.room.Room
 import com.e.practiceplcoding.db.RunningDatabase
-import com.e.practiceplcoding.other.Constans.RUNNING_DATABASE_NAME
+import com.e.practiceplcoding.other.Constants.RUNNING_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +28,5 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRunDao(db: RunningDatabase) = db.getRunDao()
-
 
 }

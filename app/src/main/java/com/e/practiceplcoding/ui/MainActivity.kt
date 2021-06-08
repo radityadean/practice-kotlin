@@ -8,11 +8,9 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.e.practiceplcoding.R
-import com.e.practiceplcoding.db.RunDAO
-import com.e.practiceplcoding.other.Constans.ACTION_SHOW_TRACKING_FRAGMENT
+import com.e.practiceplcoding.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -34,6 +32,8 @@ class MainActivity : AppCompatActivity() {
                     else -> bottomNavigationView.visibility = View.GONE
                 }
             }
+        val packageNmm = packageName
+        Log.d("PACKAGE NAME AW", packageNmm)
     }
 
     override fun onNewIntent(intent: Intent?) {

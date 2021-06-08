@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.e.practiceplcoding.R
-import com.e.practiceplcoding.other.Constans.ACTION_PAUSE_SERVICE
-import com.e.practiceplcoding.other.Constans.ACTION_START_OR_RESUME_SERVICE
-import com.e.practiceplcoding.other.Constans.MAP_ZOOM
-import com.e.practiceplcoding.other.Constans.POLYLINE_COLOR
-import com.e.practiceplcoding.other.Constans.POLYLINE_WIDTH
+import com.e.practiceplcoding.other.Constants.ACTION_PAUSE_SERVICE
+import com.e.practiceplcoding.other.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.e.practiceplcoding.other.Constants.MAP_ZOOM
+import com.e.practiceplcoding.other.Constants.POLYLINE_COLOR
+import com.e.practiceplcoding.other.Constants.POLYLINE_WIDTH
 import com.e.practiceplcoding.other.TrackingUtility
 import com.e.practiceplcoding.services.Polyline
 import com.e.practiceplcoding.services.TrackingService
 import com.e.practiceplcoding.ui.viewmodels.MainViewModel
-import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.PolylineOptions
@@ -39,7 +38,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
         btnToggleRun.setOnClickListener {
-//            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
             toogleRun()
         }
 

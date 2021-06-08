@@ -2,7 +2,7 @@ package com.e.practiceplcoding.other
 
 import android.graphics.Color
 
-object Constans {
+object Constants {
 
     const val RUNNING_DATABASE_NAME = "running_db"
 
