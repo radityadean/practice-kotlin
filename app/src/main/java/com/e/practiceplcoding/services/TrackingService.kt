@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_LOW
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
-import android.content.ContentProviderClient
 import android.content.Context
 import android.content.Intent
 import android.location.Location
@@ -48,6 +47,7 @@ typealias Polylines = MutableList<Polyline>
 class TrackingService : LifecycleService() {
 
     var isFirstRun = true
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val timeRunInSecond = MutableLiveData<Long>()
@@ -58,14 +58,12 @@ class TrackingService : LifecycleService() {
         val pathPoints = MutableLiveData<Polylines>()
     }
 
-
     private fun postInitialValue() {
         isTracking.postValue(false)
         pathPoints.postValue(mutableListOf())
         timeRunInSecond.postValue(0L)
         timeRunInMillis.postValue(0L)
     }
-
 
     override fun onCreate() {
         super.onCreate()
@@ -77,7 +75,6 @@ class TrackingService : LifecycleService() {
         })
     }
 
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             when (it.action) {
@@ -87,7 +84,6 @@ class TrackingService : LifecycleService() {
                         isFirstRun = false
                     } else {
                         Timber.d("Resuming Service...")
-//                        startForegroundService()
                         startTimer()
                     }
                 }
@@ -103,13 +99,11 @@ class TrackingService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-
     private var isTimeEnabled = false
     private var lapTime = 0L
     private var timeRun = 0L
     private var timeStarted = 0L
     private var lastSecondTimeStamp = 0L
-
 
     private fun startTimer() {
         addEmptyPolyline()
@@ -132,12 +126,10 @@ class TrackingService : LifecycleService() {
         }
     }
 
-
     private fun pauseService() {
         isTracking.postValue(false)
         isTimeEnabled = false
     }
-
 
     @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean) {
@@ -159,7 +151,6 @@ class TrackingService : LifecycleService() {
         }
     }
 
-
     val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult?) {
             super.onLocationResult(result)
@@ -174,7 +165,6 @@ class TrackingService : LifecycleService() {
         }
     }
 
-
     private fun addPathPoint(location: Location) {
         location?.let {
             val pos = LatLng(location.latitude, location.longitude)
@@ -185,7 +175,6 @@ class TrackingService : LifecycleService() {
         }
     }
 
-
     private fun addEmptyPolyline() = pathPoints.value?.apply {
         add(mutableListOf())
         pathPoints.postValue(this)
@@ -193,8 +182,6 @@ class TrackingService : LifecycleService() {
 
 
     private fun startForegroundService() {
-//        addEmptyPolyline()
-
         startTimer()
         isTracking.postValue(true)
 
@@ -216,7 +203,6 @@ class TrackingService : LifecycleService() {
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
 
-
     private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
         this, 0,
         Intent(this, MainActivity::class.java).also {
@@ -224,7 +210,6 @@ class TrackingService : LifecycleService() {
         },
         FLAG_UPDATE_CURRENT
     )
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager) {
