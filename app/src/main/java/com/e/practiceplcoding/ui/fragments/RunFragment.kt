@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.e.practiceplcoding.R
@@ -31,17 +32,19 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestPermissions()
-        setupRecycleView()
+        setupRecyclerView()
 
-            when (viewModel.sortType) {
-                SortType.DATE -> spFilter.setSelection(0)
-                SortType.RUNNING_TIME -> spFilter.setSelection(1)
-                SortType.DISTANCE -> spFilter.setSelection(2)
-                SortType.AVG_SPEED -> spFilter.setSelection(3)
-                SortType.CALORIES_BURNED -> spFilter.setSelection(4)
-            }
+        when (viewModel.sortType) {
+            SortType.DATE -> spFilter.setSelection(0)
+            SortType.RUNNING_TIME -> spFilter.setSelection(1)
+            SortType.DISTANCE -> spFilter.setSelection(2)
+            SortType.AVG_SPEED -> spFilter.setSelection(3)
+            SortType.CALORIES_BURNED -> spFilter.setSelection(4)
+        }
 
         spFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
                 view: View?,
@@ -56,10 +59,6 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
                     4 -> viewModel.sortRuns(SortType.CALORIES_BURNED)
                 }
             }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
         }
 
         viewModel.runs.observe(viewLifecycleOwner, Observer {
@@ -71,7 +70,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         }
     }
 
-    private fun setupRecycleView() = rvRuns.apply {
+    private fun setupRecyclerView() = rvRuns.apply {
         runAdapter = RunAdapter()
         adapter = runAdapter
         layoutManager = LinearLayoutManager(requireContext())
@@ -83,14 +82,16 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.requestPermissions(
-                this, "You need to accept location permission to use this app.",
+                this,
+                "You need to accept location permissions to use this app.",
                 REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         } else {
             EasyPermissions.requestPermissions(
-                this, "You need to accept location permission to use this app.",
+                this,
+                "You need to accept location permissions to use this app.",
                 REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -99,7 +100,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         }
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
         } else {
@@ -107,9 +108,7 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         }
     }
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-
-    }
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -119,5 +118,4 @@ class RunFragment : Fragment(R.layout.fragment_run), EasyPermissions.PermissionC
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
-
 }

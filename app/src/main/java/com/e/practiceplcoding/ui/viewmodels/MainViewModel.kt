@@ -1,5 +1,4 @@
 package com.e.practiceplcoding.ui.viewmodels
-
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +8,9 @@ import com.e.practiceplcoding.other.SortType
 import com.e.practiceplcoding.repositories.MainRepository
 import kotlinx.coroutines.launch
 
+
 class MainViewModel @ViewModelInject constructor(
-    val mainRepository: MainRepository
+   val mainRepository: MainRepository
 ) : ViewModel() {
 
     private val runsSortedByDate = mainRepository.getAllRunsSortedByDate()
