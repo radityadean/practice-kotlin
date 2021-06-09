@@ -21,7 +21,6 @@ import com.e.practiceplcoding.services.TrackingService
 import com.e.practiceplcoding.ui.viewmodels.MainViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -76,7 +75,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         subscribeToObservers()
     }
 
-
     private fun subscribeToObservers() {
         TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
             updateTracking(it)
@@ -94,7 +92,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             tvTimer.text = formattedTime
         })
     }
-
 
     private fun toogleRun() {
         if (isTracking) {
@@ -159,7 +156,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
     }
 
-
     private fun moveCameraToUser() {
         if (pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
             map?.animateCamera(
@@ -170,7 +166,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             )
         }
     }
-
 
     private fun zoomToSeeWholeTrack() {
         val bounds = LatLngBounds.Builder()
@@ -190,17 +185,18 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         )
     }
 
-
     private fun endRunAndSaveToDb() {
         map?.snapshot { bmp ->
             var distanceInMeters = 0
-            for(polyline in pathPoints) {
+            for (polyline in pathPoints) {
                 distanceInMeters += TrackingUtility.calculatePolylineLength(polyline).toInt()
             }
-            val avgSpeed = round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
+            val avgSpeed =
+                round((distanceInMeters / 1000f) / (curTimeInMillis / 1000f / 60 / 60) * 10) / 10f
             val dateTimestamp = Calendar.getInstance().timeInMillis
             val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
-            val run = Run(bmp, dateTimestamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
+            val run =
+                Run(bmp, dateTimestamp, avgSpeed, distanceInMeters, curTimeInMillis, caloriesBurned)
             viewModel.insertRun(run)
             Snackbar.make(
                 requireActivity().findViewById(R.id.rootView),
@@ -211,7 +207,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
     }
 
-
     private fun addAllPolylines() {
         for (polyline in pathPoints) {
             var polylineOptions = PolylineOptions()
@@ -221,7 +216,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             map?.addPolyline(polylineOptions)
         }
     }
-
 
     private fun addLatestPolyline() {
         if (pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
@@ -235,7 +229,6 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             map?.addPolyline(polyLineOptions)
         }
     }
-
 
     private fun sendCommandToService(action: String) =
         Intent(requireContext(), TrackingService::class.java).also {
