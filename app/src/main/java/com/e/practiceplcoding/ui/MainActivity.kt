@@ -1,16 +1,16 @@
 package com.e.practiceplcoding.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.e.practiceplcoding.R
 import com.e.practiceplcoding.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         val packageNmm = packageName
-        Log.d("PACKAGE NAME AW", packageNmm)
+        Timber.d(packageNmm)
     }
 
     override fun onNewIntent(intent: Intent?) {
