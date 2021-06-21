@@ -39,4 +39,8 @@
         android:id="@+id/settingsFragment"
         android:name="com.e.practiceplcoding.ui.fragments.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.e.practiceplcoding.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

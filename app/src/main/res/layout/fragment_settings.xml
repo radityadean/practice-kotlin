@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Your Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="30" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,7 +42,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Your Weight"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:maxLength="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
