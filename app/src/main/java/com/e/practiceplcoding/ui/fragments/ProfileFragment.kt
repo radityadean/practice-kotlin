@@ -15,7 +15,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         btnApplyChanges.setOnClickListener {
-            Snackbar.make(view, "Ini sedang tahap pengetesan", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(view, "Under Maintenance", Snackbar.LENGTH_SHORT).show()
         }
 
     }
